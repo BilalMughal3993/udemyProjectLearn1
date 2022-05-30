@@ -9,15 +9,18 @@ const COLOR_VALUE_INCREASE =15;
 const reducer=(state,action)=>{
   switch (action.colorToChange) {
     case "red":
-      return {...state,red:state.red+action.amount}
+      return state.red+action.amount<0||state.red+action.amount>255 ? state : 
+      {...state,red:state.red+action.amount}
       
     case "green":
-      return {...state,green:state.green+action.amount}
+      return state.green+action.amount<0||state.green+action.amount>255 ? state : 
+      {...state,green:state.green+action.amount}
     case "blue":
-      return {...state,blue:state.blue+action.amount}
+      return state.blue+action.amount<0||state.blue+action.amount>255 ? state : 
+      {...state,blue:state.blue+action.amount}
   
     default:
-      break;
+      return state;
   }
 }
 
@@ -25,6 +28,10 @@ const SquareScreen = () => {
 
 const [state,dispatch]=useReducer(reducer,{red:0,green:0,blue:0})
 const {red,green,blue}=state;
+console.log(state.red)
+console.log(state)
+console.log({red,green,blue});
+
   return (
     <View>
       <View>
